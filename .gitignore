@@ -1,3 +1,10 @@
+# Binaries
+*.bin
+*.o
+*.out
+*.png
+*.mp4
+
 # Prerequisites
 *.d
 
