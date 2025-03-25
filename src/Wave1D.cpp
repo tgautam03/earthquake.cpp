@@ -59,13 +59,13 @@ void Wave1D::solve_3pt_00(float *c)
         for (unsigned long iy = 1; iy < ny-1; iy++)
         {
             // 2nd derivative wrt x
-            float d2u_dx2 = (u(iy+1,it) - 2*u(iy,it) + u(iy-1,it)) / (dy*dy);
+            float d2u_dy2 = (u(iy+1,it) - 2*u(iy,it) + u(iy-1,it)) / (dy*dy);
 
             // Updating solution
             if (iy == i_src)
-                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dx2 + 2*u(iy,it) - u(iy,it-1) + dt*dt * src[it] / dy;
+                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dy2 + 2*u(iy,it) - u(iy,it-1) + dt*dt * src[it] / dy;
             else
-                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dx2 + 2*u(iy,it) - u(iy,it-1);
+                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dy2 + 2*u(iy,it) - u(iy,it-1);
         }
 
         // Top: Zero boundary
@@ -115,13 +115,13 @@ void Wave1D::solve_3pt_da(float *c, float alpha)
         for (unsigned long iy = 1; iy < ny-1; iy++)
         {
             // 2nd derivative wrt x
-            float d2u_dx2 = (u(iy+1,it) - 2*u(iy,it) + u(iy-1,it)) / (dy*dy);
+            float d2u_dy2 = (u(iy+1,it) - 2*u(iy,it) + u(iy-1,it)) / (dy*dy);
 
             // Updating solution
             if (iy == i_src)
-                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dx2 + 2*u(iy,it) - u(iy,it-1) + dt*dt * src[it] / dy;
+                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dy2 + 2*u(iy,it) - u(iy,it-1) + dt*dt * src[it] / dy;
             else
-                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dx2 + 2*u(iy,it) - u(iy,it-1);
+                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dy2 + 2*u(iy,it) - u(iy,it-1);
         }
 
         // Top: Damping boundary
@@ -182,13 +182,13 @@ void Wave1D::solve_5pt_da(float *c, float alpha)
         for (unsigned long iy = 2; iy < ny-2; iy++)
         {
             // 2nd derivative wrt x (5 point approximation)
-            float d2u_dx2 = (-1/12*u(iy+2,it) + 4/3*u(iy+1,it) - 5/2*u(iy,it) + 4/3*u(iy-1,it) - 1/12*u(iy-2,it))/(dy*dy);
+            float d2u_dy2 = (-1/12*u(iy+2,it) + 4/3*u(iy+1,it) - 5/2*u(iy,it) + 4/3*u(iy-1,it) - 1/12*u(iy-2,it))/(dy*dy);
 
             // Updating solution
             if (iy == i_src)
-                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dx2 + 2*u(iy,it) - u(iy,it-1) + dt*dt * src[it] / dy;
+                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dy2 + 2*u(iy,it) - u(iy,it-1) + dt*dt * src[it] / dy;
             else
-                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dx2 + 2*u(iy,it) - u(iy,it-1);
+                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dy2 + 2*u(iy,it) - u(iy,it-1);
         }
 
         // Top: Damping boundary
@@ -243,13 +243,13 @@ void Wave1D::solve_7pt_da(float *c, float alpha)
         for (unsigned long iy = 3; iy < ny-3; iy++)
         {
             // 2nd derivative wrt x
-            float d2u_dx2 = (2*u(iy-3,it) - 27*u(iy-2,it) + 270*u(iy-1,it) - 490*u(iy,it) + 270*u(iy+1,it) - 27*u(iy+2,it) + 2*u(iy+3,it))/(180*dy*dy);
+            float d2u_dy2 = (2*u(iy-3,it) - 27*u(iy-2,it) + 270*u(iy-1,it) - 490*u(iy,it) + 270*u(iy+1,it) - 27*u(iy+2,it) + 2*u(iy+3,it))/(180*dy*dy);
 
             // Updating solution
             if (iy == i_src)
-                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dx2 + 2*u(iy,it) - u(iy,it-1) + dt*dt * src[it] / dy;
+                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dy2 + 2*u(iy,it) - u(iy,it-1) + dt*dt * src[it] / dy;
             else
-                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dx2 + 2*u(iy,it) - u(iy,it-1);
+                u(iy,it+1) = (c[iy]*dt * c[iy]*dt) * d2u_dy2 + 2*u(iy,it) - u(iy,it-1);
         }
 
         // Top: Damping boundary condition
