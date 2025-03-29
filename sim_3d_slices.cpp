@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
     float z_start = 0; float z_end = 10; unsigned long nz = 201;
 
     // Time discretization
-    float t_start = 0; float t_end = 3; unsigned long nt = 3001;
+    float t_start = 0; float t_end = 5; unsigned long nt = 5001;
 
     // Required resources
     double sizeof_float = sizeof(float);

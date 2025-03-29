@@ -52,24 +52,38 @@ if __name__ == "__main__":
     X, Y = np.meshgrid(x, y)
 
     # Create the initial plot
-    fig = plt.figure(figsize=(10, 5))
+    fig = plt.figure(figsize=(11, 5))
     ax1 = fig.add_subplot(121, projection='3d')
+    ax1.view_init(elev=25, azim=55)  # Elevation: 30°, Azimuth: 45°
     ax2 = fig.add_subplot(122)
 
-    fig1, ax = plt.subplots(1, 1, figsize=(10, 5))
+    fig1, ax = plt.subplots(1, 1, figsize=(11, 4))
 
     # Initial surface plot
+    def hide_3d_axes(ax):
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_zticks([])
+        ax.xaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+        ax.yaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+        ax.zaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+        ax._axis3don = False  # This is the secret flag to hide 3D axes
     z_min = np.min(sol_surf)
     z_max = np.max(sol_surf)
+    hide_3d_axes(ax1)
     surf = ax1.plot_surface(X, Z, sol_surf[0,:,:], cmap='coolwarm', alpha=0.7, vmin=z_min, vmax=z_max)
     rec1 = ax1.scatter(x[0], y[0], sol_surf[0,0,0], color='green', marker='o', s=50, label="Location 1", zorder=2)
 
     ax1.set_xlabel("x")
     ax1.set_ylabel("z")
     ax1.set_zlabel("u")
+    ax1.set_xlabel("")
+    ax1.set_ylabel("")
+    ax1.set_zlabel("")
     ax1.set_zlim(z_min, z_max)
     title0 = ax1.set_title("t: 0 sec")
 
+    ax2.axis('off')
     plt.tight_layout()
 
     # Initial vertical plot
@@ -83,8 +97,8 @@ if __name__ == "__main__":
 
     im1 = ax2.imshow(c[0], extent=extent, aspect='auto', cmap=cmap, norm=norm)
     src = ax2.scatter((x[-1]-x[0])/2, (y[-1]-y[0])/1.25, color='red', marker='*', s=50, label="Earthquake", zorder=2)
-    rec0 = ax2.scatter(x[0], 0, color='green', marker='o', s=50, label="Location 1", zorder=2)
     rec2 = ax2.scatter(x[0], y[0], color='purple', marker='o', s=50, label="Location 2", zorder=2)
+    rec0 = ax2.scatter(x[0], 0, color='green', marker='o', s=50, label="Location 1", zorder=2)
     im2 = ax2.imshow(sol_vert[0,:,:], cmap='coolwarm', alpha=0.7, extent=extent, aspect='auto')
 
     ax2.set_xlabel("x")
@@ -114,6 +128,7 @@ if __name__ == "__main__":
 
         # Update surface plot
         ax1.clear()
+        hide_3d_axes(ax1)  # Re-apply axis hiding after clear()
         surf = ax1.plot_surface(X, Z, sol_surf[t_i,:,:], cmap='coolwarm', alpha=0.7, vmin=z_min, vmax=z_max)
         rec1 = ax1.scatter(x_val_g, z_val_g, sol_surf[t_i,z_i_g,x_i_g], color='green', marker='o', s=50, label="Location 1", zorder=2)
         ax1.set_xlabel("x")
