@@ -6,10 +6,10 @@
 
 ## Drivers
 
-1. 1D simulation: Execute `make 1d_sim` in the terminal. This will generate the executable file in `bin`, which can be called as follows: `./bin/sim_1d.out`.
-2. 3D simulation on a simpler velocity model (saving full 4D solution): Execute `make 3d_sim` in the terminal. This will generate the executable file in `bin`, which can be called as follows: `./bin/sim_3d.out`.
-3. 3D simulation on a simpler velocity model (saving a couple of 3D slices only): Execute `make 3d_sim_slices` in the terminal. This will generate the executable file in `bin`, which can be called as follows: `./bin/sim_3d_slices.out`.
-4. 3D simulation on a complex velocity model (saving a couple of 3D slices only): Execute `make 3d_sim_slices_comples` in the terminal. This will generate the executable file in `bin`, which can be called as follows: `./bin/sim_3d_slices_complex.out`.
+1. **1D simulation:** Execute `make 1d_sim` in the terminal. This will generate the executable file in `bin`, which can be called as follows: `./bin/sim_1d.out`.
+2. **3D simulation on a simpler velocity model (saving full 4D solution):** Execute `make 3d_sim` in the terminal. This will generate the executable file in `bin`, which can be called as follows: `./bin/sim_3d.out`.
+3. **3D simulation on a simpler velocity model (saving a couple of 3D slices only):** Execute `make 3d_sim_slices` in the terminal. This will generate the executable file in `bin`, which can be called as follows: `./bin/sim_3d_slices.out`.
+4. **3D simulation on a complex velocity model (saving a couple of 3D slices only):** Execute `make 3d_sim_slices_comples` in the terminal. This will generate the executable file in `bin`, which can be called as follows: `./bin/sim_3d_slices_complex.out`.
 
 ## Visualization
 
