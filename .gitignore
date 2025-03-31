@@ -5,6 +5,8 @@
 *.png
 *.mp4
 
+!Thumbnail.png
+
 # Prerequisites
 *.d
 
