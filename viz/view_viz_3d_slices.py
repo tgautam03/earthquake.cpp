@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     extent = [x[0], x[-1], y[-1], y[0]]
 
-    im1 = ax2.imshow(c[0], extent=extent, aspect='auto', cmap=cmap, norm=norm)
+    im1 = ax2.imshow(c[int(nz/2)], extent=extent, aspect='auto', cmap=cmap, norm=norm)
     src = ax2.scatter((x[-1]-x[0])/2, (y[-1]-y[0])/1.25, color='red', marker='*', s=50, label="Earthquake", zorder=2)
     rec2 = ax2.scatter(x[0], y[0], color='purple', marker='o', s=50, label="Location 2", zorder=2)
     rec0 = ax2.scatter(x[0], 0, color='green', marker='o', s=50, label="Location 1", zorder=2)
@@ -165,7 +165,7 @@ if __name__ == "__main__":
     slider_z_g = widgets.SelectionSlider(options=z.tolist(), description="Z Green (Km)")
     slider_x_p = widgets.SelectionSlider(options=x.tolist(), description="X Purple (Km)")
     slider_y_p = widgets.SelectionSlider(options=y.tolist(), description="Y Purple (Km)")
-    slider_t = widgets.SelectionSlider(options=t.tolist(), description="Time (s)")
+    slider_t = widgets.SelectionSlider(options=t[::10].tolist(), description="Time (s)")
     interactive_widget = widgets.interactive(update_plot, x_val_g=slider_x_g, z_val_g=slider_z_g, x_val_p=slider_x_p, y_val_p=slider_y_p, t_val=slider_t)
 
     # Display the slider and initial plot

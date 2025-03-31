@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>         // For using std::vector to store pockets
+#include <random>         // For random number generation
+#include <cmath>          // For mathematical operations like square roo
 
 #include "./include/Wave3D.hpp"
 

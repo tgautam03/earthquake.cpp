@@ -18,10 +18,10 @@ plt.style.use('dark_background')
 MY_GOLD = "#DAA520"
 
 if __name__ == "__main__":
-    FILE_EXT = "3pt_00"
-    # FILE_EXT = "3pt_da"
-    # FILE_EXT = "5pt_da"
-    # FILE_EXT = "7pt_da"
+    FILE_EXT = "3pt_00"     # 0 boundaries
+    # FILE_EXT = "3pt_da"   # Damping and Absorbing boundaries
+    # FILE_EXT = "5pt_da"   # Damping and Absorbing boundaries
+    # FILE_EXT = "7pt_da"   # Damping and Absorbing boundaries
     
     y = np.frombuffer(open("../data/1d/y_{}.bin".format(FILE_EXT), "rb").read(), dtype=np.float32)
     dy = y[1] - y[0]
@@ -45,6 +45,7 @@ if __name__ == "__main__":
     fig, axs = plt.subplots(1, 2, figsize=(10, 5))
 
     # Create a custom colormap
+    # cmap = mcolors.ListedColormap(['white', 'brown'])
     cmap = mcolors.ListedColormap(['white', 'brown'])
 
     # Create a normalization that maps your data range to [0, 1]
@@ -54,6 +55,8 @@ if __name__ == "__main__":
     line1, = axs[0].plot([], [], linewidth=5, color=MY_GOLD, zorder=1)  # Line plot for u(y,t) vs spatial grid points
     im = axs[0].imshow(np.ones((nx,nx))*np.expand_dims(c, axis=-1), extent=[-1.1*y_lims, 1.1*y_lims, y.max(), y.min()], 
                        aspect='auto', cmap=cmap, norm=norm)
+    # v0 = axs[0].text(-0.0035, 2.75, "10 km/s", fontsize=20, color='black')
+    # v1 = axs[0].text(-0.0035, 15, "50 km/s", fontsize=20, color='black')
     src = axs[0].scatter(0, int((y[-1]-y[0])/2), color='red', marker='*', s=50, label="Explosive", zorder=2)
     rec1 = axs[0].scatter(0, 0, color='green', marker='o', s=50, label="Location 1", zorder=2)
     rec2 = axs[0].scatter(0, 0, color='purple', marker='o', s=50, label="Location 2", zorder=2)
@@ -94,14 +97,14 @@ if __name__ == "__main__":
         rec2.set_offsets([0, y[loc2_i]])
         
         # Update titles dynamically
-        axs[0].set_title(f"u(y,t) Distribution at t: {t_val:.2f} sec")
+        # axs[0].set_title(f"u(y,t) Distribution at t: {t_val:.2f} sec")
         # axs[1].set_title(f"u(y,t) at location 1 over Time (t={t_val:.2f})")
         # axs[2].set_title(f"u(y,t) at location 2 over Time (t={t_val:.2f})")
         
         fig.canvas.draw_idle()  # Redraw only updated elements
 
     # Create an interactive slider and link it to the update function
-    slider_t = widgets.SelectionSlider(options=t.tolist(), description="Time (s)")
+    slider_t = widgets.SelectionSlider(options=t[::10].tolist(), description="Time (s)")
     slider_loc1 = widgets.SelectionSlider(options=y.tolist(), description="Loc 1 (Km)")
     slider_loc2 = widgets.SelectionSlider(options=y.tolist(), description="Loc 2 (Km)")
     interactive_widget = widgets.interactive(update_plot, t_val=slider_t, loc1=slider_loc1, loc2=slider_loc2)

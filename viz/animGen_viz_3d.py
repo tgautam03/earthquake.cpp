@@ -41,7 +41,7 @@ def create_frame(t_i, num_iterations):
         )
     )
     fig.update_layout(constant_layout)
-    pio.write_image(fig, f"./frames/frame_{t_i}.png")
+    pio.write_image(fig, f"./frames_3d/frame_{t_i}.png")
     fig.data = []
     fig = None
 
@@ -87,15 +87,15 @@ if __name__ == "__main__":
     num_iterations = len(sol_needed)
     sol_needed = sol_needed.reshape(num_iterations, -1)
 
-    print("Generating frames (this may take a while)...")
+    print("Generating frames_3d (this may take a while)...")
 
-    for t_i in range(199, num_iterations):
+    for t_i in tqdm(range(216, num_iterations)):
         create_frame(t_i, num_iterations)
 
     print(f"All {num_iterations} Frames generated!")
 
-    print("Creating mp4 from frames...")
-    image_folder = './frames/'
+    print("Creating mp4 from frames_3d...")
+    image_folder = './frames_3d/'
     fps = 30
 
     def sorted_alphanumeric(data):

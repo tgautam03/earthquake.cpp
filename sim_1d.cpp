@@ -8,7 +8,7 @@ int main(int argc, char const *argv[])
     float y_start = 0; float y_end = 20; unsigned int ny = 2001;
 
     // Time discretization
-    float t_start = 0; float t_end = 5; unsigned int nt = 50001;
+    float t_start = 0; float t_end = 10; unsigned int nt = 10001;
 
     // Medium velocity
     float c_air = 2.0f;
@@ -36,9 +36,9 @@ int main(int argc, char const *argv[])
     
     // Solve using 3 point stencil with top:0 & bottom:0 boundary conditions
     simulation.solve_3pt_00(c);
-    simulation.solve_3pt_da(c, 0.5);
-    simulation.solve_5pt_da(c, 0.5);
-    simulation.solve_7pt_da(c, 0.5);
+    simulation.solve_3pt_da(c, 0.75);
+    simulation.solve_5pt_da(c, 0.75);
+    simulation.solve_7pt_da(c, 0.75);
 
     // Free dynamic array
     delete[] c;

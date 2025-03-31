@@ -1,1 +1,1 @@
-# Frames for 3D animation
+# PNG files

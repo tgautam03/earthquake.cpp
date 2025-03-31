@@ -49,12 +49,9 @@ void Wave3D::solve(Tensor3dFP32 &c, float alpha)
     // Checking CFL condition
     float max_c = 0;
     float cur_c;
-    for (int iy = 0; iy < ny; iy++)
-    {
-        for (int ix = 0; ix < nx; ix++)
-        {
-            for (int iz = 0; iz < nz; iz++)
-            {
+    for (int iy = 0; iy < ny; iy++) {
+        for (int ix = 0; ix < nx; ix++) {
+            for (int iz = 0; iz < nz; iz++) {
                 cur_c = c(ix,iy,iz);
                 if (cur_c > max_c)
                     max_c = cur_c;
@@ -68,15 +65,11 @@ void Wave3D::solve(Tensor3dFP32 &c, float alpha)
 
     // Loop over time
     auto start = std::chrono::high_resolution_clock::now();
-    for (unsigned long it = 1; it < nt-1; it++)
-    {
+    for (unsigned long it = 1; it < nt-1; it++) {
         // Loop over space
-        for (unsigned long iz = 3; iz < nz-3; iz++)
-        {
-            for (unsigned long iy = 3; iy < ny-3; iy++)
-            {
-                for (unsigned long ix = 3; ix < nx-3; ix++)
-                {
+        for (unsigned long iz = 3; iz < nz-3; iz++) {
+            for (unsigned long iy = 3; iy < ny-3; iy++) {
+                for (unsigned long ix = 3; ix < nx-3; ix++) {
                     // 2nd derivative wrt x
                     float d2u_dx2 = (2*u(ix-3,iy,iz,it) - 27*u(ix-2,iy,iz,it) + 270*u(ix-1,iy,iz,it) - 490*u(ix,iy,iz,it) + 270*u(ix+1,iy,iz,it) - 27*u(ix+2,iy,iz,it) + 2*u(ix+3,iy,iz,it))/(180*dx*dx);
                     float d2u_dy2 = (2*u(ix,iy-3,iz,it) - 27*u(ix,iy-2,iz,it) + 270*u(ix,iy-1,iz,it) - 490*u(ix,iy,iz,it) + 270*u(ix,iy+1,iz,it) - 27*u(ix,iy+2,iz,it) + 2*u(ix,iy+3,iz,it))/(180*dy*dy);
@@ -92,10 +85,8 @@ void Wave3D::solve(Tensor3dFP32 &c, float alpha)
         }
 
         // Boundaries
-        for (unsigned long iy = 0; iy < nx; iy++)
-        {
-            for (unsigned long ix = 0; ix < ny; ix++)
-            {
+        for (unsigned long iy = 0; iy < nx; iy++) {
+            for (unsigned long ix = 0; ix < ny; ix++) {
                 // Front face: Absorbing
                 u(ix,iy,2,it+1) = u(ix,iy,3,it) + (c(ix,iy,2)*dt-dy)/(c(ix,iy,2)*dt+dy) * (u(ix,iy,3,it+1)-u(ix,iy,2,it));
                 u(ix,iy,1,it+1) = u(ix,iy,2,it) + (c(ix,iy,1)*dt-dy)/(c(ix,iy,1)*dt+dy) * (u(ix,iy,2,it+1)-u(ix,iy,1,it));
@@ -108,10 +99,8 @@ void Wave3D::solve(Tensor3dFP32 &c, float alpha)
             }
         }
 
-        for (unsigned long iz = 0; iz < nz; iz++)
-        {
-            for (unsigned long iy = 0; iy < ny; iy++)
-            {
+        for (unsigned long iz = 0; iz < nz; iz++) {
+            for (unsigned long iy = 0; iy < ny; iy++) {
                 // Side face: Absorbing
                 u(2,iy,iz,it+1) = u(3,iy,iz,it) + (c(2,iy,iz)*dt-dy)/(c(2,iy,iz)*dt+dy) * (u(3,iy,iz,it+1)-u(2,iy,iz,it));
                 u(1,iy,iz,it+1) = u(2,iy,iz,it) + (c(1,iy,iz)*dt-dy)/(c(1,iy,iz)*dt+dy) * (u(2,iy,iz,it+1)-u(1,iy,iz,it));
@@ -124,10 +113,8 @@ void Wave3D::solve(Tensor3dFP32 &c, float alpha)
             }
         }
 
-        for (unsigned long iz = 0; iz < nz; iz++)
-        {
-            for (unsigned long ix = 0; ix < nx; ix++)
-            {
+        for (unsigned long iz = 0; iz < nz; iz++) {
+            for (unsigned long ix = 0; ix < nx; ix++) {
                 // Top face: Damping
                 u(ix,2,iz,it+1) = u(ix,2,iz,it) + (c(ix,2,iz)*dt/dy)*(u(ix,3,iz,it) - u(ix,2,iz,it)) - alpha*(u(ix,2,iz,it) - u(ix,2,iz,it-1));
                 u(ix,1,iz,it+1) = u(ix,1,iz,it) + (c(ix,1,iz)*dt/dy)*(u(ix,2,iz,it) - u(ix,1,iz,it)) - alpha*(u(ix,1,iz,it) - u(ix,1,iz,it-1));

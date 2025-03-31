@@ -30,6 +30,9 @@ utils.o: src/utils.cpp
 3d_sim_slices: Tensor4dFP32.o Tensor3dFP32.o utils.o src/Wave3D.cpp sim_3d_slices.cpp 
 	@$(CC) $(CPU_OPTIMIZE) build/Tensor4dFP32.o build/Tensor3dFP32.o build/utils.o src/Wave3D.cpp sim_3d_slices.cpp -o bin/sim_3d_slices.out
 
+3d_sim_slices_complex: Tensor4dFP32.o Tensor3dFP32.o utils.o src/Wave3D.cpp sim_3d_slices_complex.cpp 
+	@$(CC) $(CPU_OPTIMIZE) build/Tensor4dFP32.o build/Tensor3dFP32.o build/utils.o src/Wave3D.cpp sim_3d_slices_complex.cpp -o bin/sim_3d_slices_complex.out
+
 ##########################
 # Clean executable files #
 ##########################
@@ -40,3 +43,7 @@ clean:
 clean_img:
 	@echo "Removing frames..."
 	rm viz/frames/*.png
+
+clean_img_3d:
+	@echo "Removing frames..."
+	viz/frames_3d/*.png

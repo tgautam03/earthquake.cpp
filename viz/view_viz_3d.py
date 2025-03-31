@@ -118,7 +118,7 @@ if __name__ == "__main__":
     slider_x_p = widgets.SelectionSlider(options=x.tolist(), description="X Purple (Km)")
     slider_y_p = widgets.SelectionSlider(options=y.tolist(), description="Y Purple (Km)")
     slider_z = widgets.SelectionSlider(options=z.tolist(), description="Z (Km)")
-    slider_t = widgets.SelectionSlider(options=t.tolist(), description="Time (s)")
+    slider_t = widgets.SelectionSlider(options=t[::10].tolist(), description="Time (s)")
     interactive_widget = widgets.interactive(update_plot, x_val_g=slider_x_g, y_val_g=slider_y_g, 
                                              x_val_p=slider_x_p, y_val_p=slider_y_p, 
                                              z_val=slider_z, t_val=slider_t)
