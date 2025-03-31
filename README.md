@@ -1,8 +1,14 @@
 # earthquake.cpp
 
+![](Thumbnail.png)
+
 3D earthquake wave simulation in C++. Python required for visualization only (use requirements.txt to install dependencies). 
 
 > Tested on Ubuntu 22.04.2 LTS using g++ compiler. I'm not using any fancy C++ features (only used classes), so it should work fine on other systems as well (but, don't blame me if it doesn't)
+
+**YouTube Video:** https://www.youtube.com/watch?v=6kHhLTdwOR4
+
+**Blog Post:** https://0mean1sigma.com/mi3d-earthquake-simulation/
 
 ## Drivers
 
